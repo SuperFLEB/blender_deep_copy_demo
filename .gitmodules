@@ -1,0 +1,3 @@
+[submodule "src/lib/blender_deepcopy_lib"]
+	path = src/lib/blender_deepcopy_lib
+	url = git@github.com:SuperFLEB/blender_deepcopy_lib.git
