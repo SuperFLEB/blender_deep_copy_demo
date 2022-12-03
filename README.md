@@ -2,15 +2,18 @@
 
 https://github.com/SuperFLEB/blender_deep_copy_demo
 
-This is a Blender addon that allows you to do more in Blender than you could before.
-This Readme still nees to be written, as this is the dummy copy from the template.
-Don't that just lorem your ipsum?
+This is a Blender addon that demonstrates the [Deep Copy Library](https://github.com/SuperFLEB/blender_deep_copy_lib)
+and can be used for debug and development.
 
 ## Features
 
-* Dummy copy
-* Dummy code
-* Dumb mistakes
+Adds an operator that makes in-place copies of objects and their data, materials, and the nodegroups in materials.
+If there are collection instances, those are copied as well.
+
+* All data is made unique from unselected objects, but is common among the selection.
+* Some features are not yet covered. What will happen with them is your guess:
+  * Vertex instances
+  * Geometry nodes
 
 ## To install
 
@@ -19,9 +22,14 @@ build_release.py script to build a ZIP file that you can install into Blender.
 
 ## To use
 
-Do what comes naturally, I guess.
+1. Select one or more objects.
+2. Press Spacebar/W (depending on mode) to open the context menu.
+3. In the "Deep Copy Demo", select "Deep Copy"
+4. Notice how everything's the same, but different now.
 
 ## Testing
+
+Tests don't exist yet, but there will probably be some.
 
 To run unit tests, run (from the Blender install directory):
 

@@ -35,7 +35,9 @@ class DeepCopyOperator(Operator):
         return bool(bpy.context.selected_objects)
 
     def execute(self, context) -> Set[str]:
-        blender_deepcopy_lib.deep_copy_objects(bpy.context.selected_objects, 'copy')
+        obj_copies = blender_deepcopy_lib.deep_copy_objects(bpy.context.selected_objects, 'copy')
+        blender_deepcopy_lib.deep_copy_materials(obj_copies, 'copy')
+        blender_deepcopy_lib.deep_copy_material_nodegroups(obj_copies, 'copy')
         return {'FINISHED'}
 
 
