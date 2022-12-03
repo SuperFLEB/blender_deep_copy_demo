@@ -2,7 +2,7 @@
 
 https://github.com/SuperFLEB/blender_deep_copy_demo
 
-This is a Blender addon that demonstrates the [Deep Copy Library](https://github.com/SuperFLEB/blender_deep_copy_lib)
+This is a Blender addon that demonstrates the [Deep Copy Library](https://github.com/SuperFLEB/blender_deepcopy_lib)
 and can be used for debug and development.
 
 ## Features
@@ -11,7 +11,7 @@ Adds an operator that makes in-place copies of objects and their data, materials
 If there are collection instances, those are copied as well.
 
 * All data is made unique from unselected objects, but is common among the selection.
-* Some features are not yet covered. What will happen with them is your guess:
+* Some features will fail to copy or will behave unexpectedly:
   * Vertex instances
   * Geometry nodes
 

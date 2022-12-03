@@ -16,28 +16,35 @@ _LOADED = True
 package_name = pkginfo.package_name()
 
 
-def generate_enum_items(self, context) -> list[tuple[str, str, str]]:
-    result = []
-    for sign in "+-":
-        for axis in "XYZ":
-            result.append((f"{sign}{axis}", f"Align {sign}{axis}", f"Align something on the {sign}{axis} axis"))
-    return result
-
-
 class DeepCopyOperator(Operator):
     """Demonstration and debug tool for blender_deep_copy_lib"""
     bl_idname = "deepcopy_demo.an_operator"
     bl_label = "Deep Copy"
     bl_options = {'REGISTER', 'UNDO'}
 
+    prefix: StringProperty(name="Prefix", default='copy')
+    prefer_existing_materials: BoolProperty(name="Use existing materials/node groups", default=False, description="If materials or node groups with this prefix exist in the document already, use them instead of copying.")
+
     @classmethod
     def poll(cls, context) -> bool:
         return bool(bpy.context.selected_objects)
 
+    def draw(self, context) -> None:
+        self.layout.prop(self, "prefix")
+        self.layout.prop(self, "prefer_existing_materials")
+
+    def invoke(self, context, event) -> Set[str]:
+        util.reset_operator_defaults(self, [
+            "prefix",
+            "prefer_existing_materials"
+        ])
+
+        return self.execute(context)
+
     def execute(self, context) -> Set[str]:
-        obj_copies = blender_deepcopy_lib.deep_copy_objects(bpy.context.selected_objects, 'copy')
-        blender_deepcopy_lib.deep_copy_materials(obj_copies, 'copy')
-        blender_deepcopy_lib.deep_copy_material_nodegroups(obj_copies, 'copy')
+        obj_copies = blender_deepcopy_lib.deep_copy_objects(bpy.context.selected_objects, self.prefix)
+        material_copies = blender_deepcopy_lib.deep_copy_materials(obj_copies, self.prefix, self.prefer_existing_materials)
+        blender_deepcopy_lib.deep_copy_material_nodegroups(material_copies, self.prefix, self.prefer_existing_materials)
         return {'FINISHED'}
 
 
