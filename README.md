@@ -17,6 +17,8 @@ If there are collection instances, those are copied as well.
 
 ## To install
 
+Before installing, be sure to initialize submodules, as this includes the library as a submodule.
+
 Either install the ZIP file from the release, clone this repository and use the
 build_release.py script to build a ZIP file that you can install into Blender.
 
